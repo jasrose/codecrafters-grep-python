@@ -9,6 +9,8 @@ def match_pattern(input_line, pattern):
     elif pattern == "\\w":
         return any(c.isalpha() for c in input_line)
     elif pattern[0] == "[" and pattern[-1] == "]":
+        if pattern[1] == "^":
+            return not any(c in pattern[1:-1] for c in input_line)
         return any(c in pattern[1:-1] for c in input_line)
     else:
         raise RuntimeError(f"Unhandled pattern: {pattern}")
